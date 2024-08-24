@@ -43,7 +43,7 @@ include_directories(
   ${std_msgs_INCLUDE_DIRS}
   ${unitree_go_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
-  ${go2_scratch_INCLUDE_DIRS}
+  ${go2_gait_planner_INCLUDE_DIRS}
 )
 
 

@@ -158,7 +158,7 @@ private:
      * This method calculates and applies the necessary leg movements for the jump motion.
      */
     void jump();
-    /* void gaitParamsCallback(go2_scratch::msg::GaitParam::SharedPtr gaitParamsMsg);
+    /* void gaitParamsCallback(go2_gait_planner::msg::GaitParam::SharedPtr gaitParamsMsg);
     void setStanceDuration(int val);
     void setStanceDepth(float val);
     void setSwingHeight(float val);
@@ -166,9 +166,9 @@ private:
     void publishLowCmd() override; */
 
     // rclcpp::TimerBase::SharedPtr gaitTimer_;
-    // rclcpp::Subscription<go2_scratch::msg::GaitParam>::SharedPtr gait_params_sub;
+    // rclcpp::Subscription<go2_gait_planner::msg::GaitParam>::SharedPtr gait_params_sub;
 
-    // std::string gait_params_topic = "/go2_scratch/gait_msg";
+    // std::string gait_params_topic = "/go2_gait_planner/gait_msg";
 };
 
 #endif // TROT_GAIT

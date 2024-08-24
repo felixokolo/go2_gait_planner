@@ -42,7 +42,7 @@ StateMonitor(robotModel, nodeName), robotModel(robotModel)
     cmdPubTimer = this->create_wall_timer(std::chrono::milliseconds(1),
                                           std::bind(&BodyMover::publishLowCmd, this));
     mover_sub = this->
-    create_subscription<go2_scratch::msg::MoveLeg>(mover_topic, 10,
+    create_subscription<go2_gait_planner::msg::MoveLeg>(mover_topic, 10,
                                                    std::bind(&BodyMover::moverCallback,
                                                              this, std::placeholders::_1));
     standSit_sub = this->
@@ -70,7 +70,7 @@ void BodyMover::publishLowCmd()
 
 }
 
-void BodyMover::moverCallback(go2_scratch::msg::MoveLeg::SharedPtr moveMsg)
+void BodyMover::moverCallback(go2_gait_planner::msg::MoveLeg::SharedPtr moveMsg)
 {
     startTime = curTime;
     writeFile = true;

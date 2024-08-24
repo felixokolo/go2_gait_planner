@@ -11,14 +11,14 @@ BaseGait::BaseGait(Robot *robotModel, std::string nodeName):
 BodyMover(robotModel, nodeName), robotModel(robotModel)
 {
     gaitTimer_ = this->create_wall_timer(std::chrono::milliseconds(1), std::bind(&BaseGait::gaitCallback, this));
-    gait_params_sub = this->create_subscription<go2_scratch::msg::GaitParam>(
+    gait_params_sub = this->create_subscription<go2_gait_planner::msg::GaitParam>(
         gait_params_topic, 10, std::bind(&BaseGait::gaitParamsCallback, this, std::placeholders::_1));
     cmdPubTimer = this->create_wall_timer(std::chrono::milliseconds(1),
                                           std::bind(&BaseGait::publishLowCmd, this));
 }
 
 
-void BaseGait::gaitParamsCallback(go2_scratch::msg::GaitParam::SharedPtr gaitParamsMsg)
+void BaseGait::gaitParamsCallback(go2_gait_planner::msg::GaitParam::SharedPtr gaitParamsMsg)
 {
     setGaitMotion(static_cast<GaitMotion>(gaitParamsMsg->movement));
     setStanceDuration(static_cast<int>(gaitParamsMsg->stance_duration * 500));

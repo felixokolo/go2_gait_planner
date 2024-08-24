@@ -15,10 +15,10 @@ Node(nodeName), robotModel(robotModel)
     
     lowState_sub = this->create_subscription<unitree_go::msg::LowState>(
         joint_state_topic, 5, std::bind(&StateMonitor::stateUpdateCallback, this, std::placeholders::_1));
-    params_sub = this->create_subscription<go2_scratch::msg::ParamsSet>(
+    params_sub = this->create_subscription<go2_gait_planner::msg::ParamsSet>(
         params_topic, 10, std::bind(&StateMonitor::paramsCallback, this, std::placeholders::_1));
 
-    joints_sub = this->create_subscription<go2_scratch::msg::JointsSet>(
+    joints_sub = this->create_subscription<go2_gait_planner::msg::JointsSet>(
         joints_topic, 10, std::bind(&StateMonitor::jointsCallback, this, std::placeholders::_1));
 
     lowCmd_pub = this->create_publisher<unitree_go::msg::LowCmd>(joint_cmd_topic, 10);
@@ -213,7 +213,7 @@ void StateMonitor::writeToFile()
     imuFile.close();
 }
 
-void StateMonitor::paramsCallback(go2_scratch::msg::ParamsSet::SharedPtr paramsMsg)
+void StateMonitor::paramsCallback(go2_gait_planner::msg::ParamsSet::SharedPtr paramsMsg)
 {
     std::vector<double> jointAngles = robotModel->getAngles();
     std::vector<double> jointVels = robotModel->getVels();
@@ -276,7 +276,7 @@ void StateMonitor::paramsCallback(go2_scratch::msg::ParamsSet::SharedPtr paramsM
     //publishLowCmd();
 }
 
-void StateMonitor::jointsCallback(go2_scratch::msg::JointsSet::SharedPtr jointsMsg)
+void StateMonitor::jointsCallback(go2_gait_planner::msg::JointsSet::SharedPtr jointsMsg)
 {
     startTime = curTime;
     // writeFile = true;

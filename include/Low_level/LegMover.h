@@ -155,7 +155,7 @@ private:
      */
 
     /*
-    void paramsCallback(go2_scratch::msg::ParamsSet::SharedPtr paramsMsg);
+    void paramsCallback(go2_gait_planner::msg::ParamsSet::SharedPtr paramsMsg);
     void controllLoop();
     void mover();
     void orientControllLoop(); */
@@ -169,7 +169,7 @@ private:
 
 
 
-    rclcpp::Subscription<go2_scratch::msg::ParamsSet>::SharedPtr params_sub;
+    rclcpp::Subscription<go2_gait_planner::msg::ParamsSet>::SharedPtr params_sub;
 
      */
 };

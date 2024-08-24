@@ -11,16 +11,7 @@ LegMover::LegMover(Leg *leg, std::vector<double>::iterator qTarg):
             leg(leg), leg_qTarg(qTarg)
 {
     F_Ext = Eigen::Vector3d({0.0, 0.0, -15.0}); // 45N Force in the z-axis
-    /* mover_sub = this->create_subscription<go2_scratch::msg::MoveLeg>(
-        mover_topic, 10, std::bind(&LegMover::moverCallback, this, std::placeholders::_1));
     
-        
-    moveTimer_ = this->create_wall_timer(std::chrono::milliseconds((int)(1000/PUB_RATE)), std::bind(&LegMover::mover, this));
-    // swingTimer_ = this->create_wall_timer(std::chrono::milliseconds((int)(1000/PUB_RATE)), std::bind(&LegMover::swingMover, this));
-    // cmdPubTimer = this->create_wall_timer(std::chrono::milliseconds(1), std::bind(&LegMover::publishLowCmd, this));
-    // controllLoopTimer = this->create_wall_timer(std::chrono::milliseconds(1), std::bind(&LegMover::controllLoop, this));
-    F_Ext = Eigen::Vector3d({0.0, 0.0, -15.0}); // 45N Force in the z-axis
-    cmdTaus = Eigen::Vector<double, 12>({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}); */
 }
 
 void LegMover::moveLegStraight(Eigen::Vector3d direction, int duration, int phaseOffset)

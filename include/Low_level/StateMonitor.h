@@ -17,10 +17,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include "unitree_go/msg/low_state.hpp"
 #include "unitree_go/msg/low_cmd.hpp"
-#include "go2_scratch/msg/move_leg.hpp"
-#include "go2_scratch/msg/params_set.hpp"
-#include "go2_scratch/msg/gait_param.hpp"
-#include "go2_scratch/msg/joints_set.hpp"
+#include "go2_gait_planner/msg/move_leg.hpp"
+#include "go2_gait_planner/msg/params_set.hpp"
+#include "go2_gait_planner/msg/gait_param.hpp"
+#include "go2_gait_planner/msg/joints_set.hpp"
 #include <std_msgs/msg/string.hpp>
 #include "motor_crc.h"
 
@@ -68,13 +68,13 @@ protected:
     // Timers
     rclcpp::TimerBase::SharedPtr cmdPubTimer; /**< Timer for publishing commands. */
 
-    std::string params_topic = "/go2_scratch/params"; /**< ROS 2 topic for parameters. */
+    std::string params_topic = "/go2_gait_planner/params"; /**< ROS 2 topic for parameters. */
 
     std::mutex guard_mutex; /**< Mutex for synchronizing access to shared data. */
 
 private:
     Robot *robotModel;                                             /**< Pointer to the Robot object used for managing robot state. */
-    const std::string imuFileName = "src/go2_scratch/imu_values_"; /**< Base name for IMU file output. */
+    const std::string imuFileName = "src/go2_gait_planner/imu_values_"; /**< Base name for IMU file output. */
     const std::string imuFileNameExt = ".txt";                     /**< Extension for IMU file output. */
 
     /**
@@ -107,13 +107,13 @@ private:
      * @param jointsMsg Shared pointer to the received JointsSet message.
      */
 
-    void jointsCallback(go2_scratch::msg::JointsSet::SharedPtr jointsMsg);
+    void jointsCallback(go2_gait_planner::msg::JointsSet::SharedPtr jointsMsg);
     /**
      * @brief Callback function for parameters set messages.
      *
      * @param paramsMsg Shared pointer to the received ParamsSet message.
      */
-    void paramsCallback(go2_scratch::msg::ParamsSet::SharedPtr paramsMsg);
+    void paramsCallback(go2_gait_planner::msg::ParamsSet::SharedPtr paramsMsg);
 
     int legType = 0;                  /**< Type of leg currently being processed. */
     const long long simTime = 200000; /**< Simulation time in milliseconds (20s). */
@@ -128,12 +128,12 @@ private:
     // Publishers and Subscribers
     rclcpp::Subscription<unitree_go::msg::LowState>::SharedPtr lowState_sub;
     rclcpp::Publisher<unitree_go::msg::LowCmd>::SharedPtr lowCmd_pub;
-    rclcpp::Subscription<go2_scratch::msg::JointsSet>::SharedPtr joints_sub;
-    rclcpp::Subscription<go2_scratch::msg::ParamsSet>::SharedPtr params_sub;
+    rclcpp::Subscription<go2_gait_planner::msg::JointsSet>::SharedPtr joints_sub;
+    rclcpp::Subscription<go2_gait_planner::msg::ParamsSet>::SharedPtr params_sub;
 
     std::string joint_state_topic = "/lowstate";      /**< ROS 2 topic for joint state updates. */
     std::string joint_cmd_topic = "/lowcmd";          /**< ROS 2 topic for joint commands. */
-    std::string joints_topic = "/go2_scratch/joints"; /**< ROS 2 topic for joints set messages. */
+    std::string joints_topic = "/go2_gait_planner/joints"; /**< ROS 2 topic for joints set messages. */
 };
 
 #endif // STATEMONITOR

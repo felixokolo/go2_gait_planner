@@ -15,8 +15,8 @@
 
 #include "Quadruped/Robot.h"
 #include "Low_level/StateMonitor.h"
-#include "go2_scratch/msg/move_leg.hpp"
-#include "go2_scratch/msg/params_set.hpp"
+#include "go2_gait_planner/msg/move_leg.hpp"
+#include "go2_gait_planner/msg/params_set.hpp"
 #include "Low_level/LegMover.h"
 
 #include <eigen3/unsupported/Eigen/Splines>
@@ -130,7 +130,7 @@ private:
      * @brief Callback function for processing movement commands.
      * @param moveMsg Shared pointer to the MoveLeg message containing movement commands.
      */
-    void moverCallback(go2_scratch::msg::MoveLeg::SharedPtr moveMsg);
+    void moverCallback(go2_gait_planner::msg::MoveLeg::SharedPtr moveMsg);
 
     /**
      * @brief Callback function for processing stand/sit commands.
@@ -147,12 +147,12 @@ private:
     rclcpp::TimerBase::SharedPtr RR_moveTimer_; /**< ROS2 Timer for triggering rear-right leg movements. */
     rclcpp::TimerBase::SharedPtr RL_moveTimer_; /**< ROS2 Timer for triggering rear-left leg movements. */
 
-    rclcpp::Subscription<go2_scratch::msg::MoveLeg>::SharedPtr mover_sub; /**< ROS2 Subscription for receiving movement commands. */
+    rclcpp::Subscription<go2_gait_planner::msg::MoveLeg>::SharedPtr mover_sub; /**< ROS2 Subscription for receiving movement commands. */
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr standSit_sub;   /**< ROS2 Subscription for receiving stand/sit commands. */
-    // rclcpp::Subscription<go2_scratch::msg::ParamsSet>::SharedPtr params_sub override;
+    // rclcpp::Subscription<go2_gait_planner::msg::ParamsSet>::SharedPtr params_sub override;
 
-    std::string mover_topic = "/go2_scratch/move";         /**< ROS2 topic for movement commands. */
-    std::string standSit_topic = "/go2_scratch/stand_sit"; /**< ROS2 topic for stand/sit commands. */
+    std::string mover_topic = "/go2_gait_planner/move";         /**< ROS2 topic for movement commands. */
+    std::string standSit_topic = "/go2_gait_planner/stand_sit"; /**< ROS2 topic for stand/sit commands. */
 };
 
 #endif // BODY_MOVER
