@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(go2_scratch)
+project(go2_gait_planner)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
