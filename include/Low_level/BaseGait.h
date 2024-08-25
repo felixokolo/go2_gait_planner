@@ -106,6 +106,8 @@ private:
      */
     void setGaitMotion(GaitMotion val);
 
+    void publishLowCmd() override;
+
     rclcpp::TimerBase::SharedPtr gaitTimer_;
     rclcpp::Subscription<go2_gait_planner::msg::GaitParam>::SharedPtr gait_params_sub;
 

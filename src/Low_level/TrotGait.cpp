@@ -77,7 +77,7 @@ void TrotGait::stand()
             if (!legMovers[RL]->swingPhase) legMovers[RL]->moveLegPosition(RL_STAND, stance_duration, SWING, swingHeight, 0);
 
             phase = 1;
-            delay = 500;
+            delay = DELAY_TIME;
 
         break;
 
@@ -88,7 +88,7 @@ void TrotGait::stand()
             if (!legMovers[RR]->swingPhase) legMovers[RR]->moveLegPosition(RR_STAND, stance_duration, SWING, swingHeight, 0);
 
             phase = 0;
-            delay = 500;
+            delay = DELAY_TIME;
         break;
     }
 }
@@ -107,7 +107,7 @@ void TrotGait::forward()
             // standing = false;
 
             phase = 1;
-            delay = 500;
+            delay = DELAY_TIME;
 
         break;
 
@@ -121,7 +121,7 @@ void TrotGait::forward()
             // standing = false;
 
             phase = 0;
-            delay = 500;
+            delay = DELAY_TIME;
         break;
 
         /* case 2:
@@ -152,7 +152,7 @@ void TrotGait::backward()
             // standing = false;
 
             phase = 1;
-            delay = 500;
+            delay = DELAY_TIME;
 
         break;
 
@@ -166,7 +166,7 @@ void TrotGait::backward()
             // standing = false;
 
             phase = 0;
-            delay = 500;
+            delay = DELAY_TIME;
         break;
     }
 }
@@ -184,9 +184,8 @@ void TrotGait::right()
 
             // standing = false;
 
-            phase++;
-            if (phase == 2)
-                phase = 0;
+            phase = 1;
+            delay = DELAY_TIME;
 
         break;
 
@@ -199,9 +198,8 @@ void TrotGait::right()
 
             // standing = false;
 
-            phase++;
-            if (phase == 2)
-                phase = 0;
+            phase = 0;
+            delay = DELAY_TIME;
         break;
     }
 }
@@ -218,9 +216,7 @@ void TrotGait::jump()
              if (!legMovers[RL]->straightPhase) legMovers[RL]->moveLegPosition(RL_BENT, 1000, STRAIGHT, stanceDepth, 0);
             // standing = false; 
             // std::cout<<"I Bent"<<std::endl;
-             phase++;
-             if (phase == 4)
-                phase = 0;
+             phase = 1;
 
         break;
 
@@ -230,9 +226,7 @@ void TrotGait::jump()
             if (!legMovers[RR]->straightPhase) legMovers[RR]->moveLegPosition(RR_JUMP, stance_duration, STRAIGHT, swingHeight, 0);
             if (!legMovers[RL]->straightPhase) legMovers[RL]->moveLegPosition(RL_JUMP, stance_duration, STRAIGHT, swingHeight, 0);
             // std::cout<<"I jumped"<<std::endl;
-            phase++;
-            if (phase == 4)
-               phase = 0;
+            phase = 2;
         break;
 
          case 2:
@@ -241,9 +235,7 @@ void TrotGait::jump()
             if (!legMovers[RR]->straightPhase) legMovers[RR]->moveLegPosition(RR_MIDDLE, 200, STRAIGHT, swingHeight, 0);
             if (!legMovers[RL]->straightPhase) legMovers[RL]->moveLegPosition(RL_MIDDLE, 200, STRAIGHT, swingHeight, 0);
             // std::cout<<"I jumped"<<std::endl;
-            phase++;
-            if (phase == 4)
-               phase = 0;
+            phase = 3;
         break;       
 
         case 3:
@@ -253,9 +245,7 @@ void TrotGait::jump()
             if (!legMovers[RL]->straightPhase) legMovers[RL]->moveLegPosition(RL_STAND, 1000, STRAIGHT, swingHeight, 0);
              
             // std::cout<<"I stood"<<std::endl;
-            phase++;
-            if (phase == 4)
-               phase = 0;
+            phase = 0;
             gaitMotion = GAIT_MOTION_NUM;
         break;
 
@@ -277,10 +267,8 @@ void TrotGait::left()
 
             // standing = false;
 
-            phase++;
-            if (phase == 2)
-                phase = 0;
-
+            phase = 1;
+            delay = DELAY_TIME;
         break;
 
         case 1:
@@ -292,9 +280,8 @@ void TrotGait::left()
 
             // standing = false;
 
-            phase++;
-            if (phase == 2)
-                phase = 0;
+            phase = 0;
+            delay = DELAY_TIME;
         break;
     }
 }

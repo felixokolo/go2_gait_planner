@@ -73,7 +73,7 @@ void BodyMover::publishLowCmd()
 void BodyMover::moverCallback(go2_gait_planner::msg::MoveLeg::SharedPtr moveMsg)
 {
     startTime = curTime;
-    writeFile = true;
+    // writeFile = true;
     MotionType motionType = (MotionType)moveMsg->motion_type;
     Eigen::Vector3d direction(moveMsg->direction[0],
                               moveMsg->direction[1],

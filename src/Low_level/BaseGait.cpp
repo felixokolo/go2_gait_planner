@@ -10,7 +10,7 @@
 BaseGait::BaseGait(Robot *robotModel, std::string nodeName):
 BodyMover(robotModel, nodeName), robotModel(robotModel)
 {
-    gaitTimer_ = this->create_wall_timer(std::chrono::milliseconds(1), std::bind(&BaseGait::gaitCallback, this));
+    // gaitTimer_ = this->create_wall_timer(std::chrono::milliseconds(1), std::bind(&BaseGait::gaitCallback, this));
     gait_params_sub = this->create_subscription<go2_gait_planner::msg::GaitParam>(
         gait_params_topic, 10, std::bind(&BaseGait::gaitParamsCallback, this, std::placeholders::_1));
     cmdPubTimer = this->create_wall_timer(std::chrono::milliseconds(1),
@@ -27,7 +27,7 @@ void BaseGait::gaitParamsCallback(go2_gait_planner::msg::GaitParam::SharedPtr ga
     // std::cout << "new time type " << gaitParamsMsg->stance_duration * 1000 << std::endl;
     if (!writeFile)
     {
-        writeFile = true;
+        // writeFile = true;
         startTime = curTime;
     }
     
@@ -62,6 +62,14 @@ void BaseGait::setGaitMotion(GaitMotion val)
     // std::cout << "start Time " << startTime << std::endl;
 }
 
+void BaseGait::publishLowCmd()
+{
+    if(curTime % 10 > 5)
+    {
+        gaitCallback();
+    }
+    BodyMover::publishLowCmd();
+}
 
 BaseGait::~BaseGait()
 {

@@ -3,14 +3,14 @@ from rclpy.node import Node
 import json
 
 # Import the custom message type
-from go2_scratch.msg import JointsSet
+from go2_gait_planner.msg import JointsSet
 
 class ParamsPublisher(Node):
     def __init__(self):
         super().__init__('params_publisher')
         
         # Create a publisher for the custom message
-        self.publisher_ = self.create_publisher(JointsSet, '/go2_scratch/joints', 10)
+        self.publisher_ = self.create_publisher(JointsSet, '/go2_gait_planner/joints', 10)
         
         # Read parameters from the JSON file
         with open('../assets/params.json', 'r') as f:
@@ -29,7 +29,7 @@ class ParamsPublisher(Node):
         
         # Publish the message
         self.publisher_.publish(msg)
-        self.get_logger().info('Parameters published to /go2_scratch/params topic')
+        self.get_logger().info('Parameters published to /go2_gait_planner/params topic')
 
 def main(args=None):
     rclpy.init(args=args)
