@@ -1,1 +1,1 @@
-# go2_scratch
+# go2_gait_planner
