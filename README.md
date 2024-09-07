@@ -41,3 +41,10 @@ To get started with the Go2 Gait Planner, follow these steps:
 git clone https://github.com/felixokolo/go2_gait_planner.git
 cd go2_gait_planner
 colcon build --packages-select go2_gait_planner
+```
+
+## Project Structure
+![System Architecture](./System_architecture.png)
+
+## Simulation Environment
+![Simulation Image](./simulation_setup.jpeg)
