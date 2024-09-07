@@ -44,7 +44,7 @@ colcon build --packages-select go2_gait_planner
 ```
 
 ## Project Structure
-![System Architecture](./System_architecture2.png)
+![System Architecture](./System_architecture.png)
 
 ## Simulation Environment
 ![Simulation Image](./simulation_setup.jpeg)
