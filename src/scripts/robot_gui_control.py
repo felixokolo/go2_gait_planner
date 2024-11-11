@@ -4,10 +4,10 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from std_msgs.msg import Int32
-from go2_scratch.msg import ParamsSet
-from go2_scratch.msg import MoveLeg
-from go2_scratch.msg import JointsSet
-from go2_scratch.msg import GaitParam
+from go2_gait_planner.msg import ParamsSet
+from go2_gait_planner.msg import MoveLeg
+from go2_gait_planner.msg import JointsSet
+from go2_gait_planner.msg import GaitParam
 from unitree_go.msg import LowState
 
 import os
@@ -34,11 +34,11 @@ class RobotControlGUI:
 
         self.master.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
 
-        self.publisher = self.node.create_publisher(MoveLeg, '/go2_scratch/move', 10)
-        self.publisher1 = self.node.create_publisher(JointsSet, '/go2_scratch/joints', 10)
-        self.publisher2 = self.node.create_publisher(ParamsSet, '/go2_scratch/params', 10)
-        self.publisher3 = self.node.create_publisher(Int32, '/go2_scratch/stand_sit', 10)
-        self.publisher4 = self.node.create_publisher(GaitParam, '/go2_scratch/gait_msg', 10)
+        self.publisher = self.node.create_publisher(MoveLeg, '/go2_gait_planner/move', 10)
+        self.publisher1 = self.node.create_publisher(JointsSet, '/go2_gait_planner/joints', 10)
+        self.publisher2 = self.node.create_publisher(ParamsSet, '/go2_gait_planner/params', 10)
+        self.publisher3 = self.node.create_publisher(Int32, '/go2_gait_planner/stand_sit', 10)
+        self.publisher4 = self.node.create_publisher(GaitParam, '/go2_gait_planner/gait_msg', 10)
         self.active_leg = None
         self.joint_angles_FL=[0,0,0]
         self.joint_angles_FR=[0,0,0]

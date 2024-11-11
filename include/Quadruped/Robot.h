@@ -2,8 +2,8 @@
  *      @file:      Robot.h
  *
  *      @date:    2 Jun 2024  
-      @author:    Priyanka
-      @cheked:    Felix
+ *     @author:    Priyanka
+ *     @cheked:    Felix
  */
 
 #ifndef ROBOT_H
@@ -127,20 +127,17 @@ public:
      * @brief Get the orientation of the robot's body.
      * @return The orientation as a 3D vector (roll, pitch, yaw).
      */
-    Eigen::Vector3d getOrientation()      @date:      
-      @author:    
-      @cheked:    
-
+    Eigen::Vector3d getOrientation();
         /* Eigen::Vector3d move_FL(Eigen::Vector3d position);
         Eigen::Vector3d move_FR(Eigen::Vector3d position);
         Eigen::Vector3d move_RL(Eigen::Vector3d position);
         Eigen::Vector3d move_RR(Eigen::Vector3d position); */
 
-        /**
-         * @brief Set the joint angles for all legs.
-         * @param angles A vector containing the desired angles for all joints.
-         */
-        void setAngles(std::vector<double> angles);
+    /**
+     * @brief Set the joint angles for all legs.
+     * @param angles A vector containing the desired angles for all joints.
+     */
+    void setAngles(std::vector<double> angles);
 
     /**
      * @brief Set the joint velocities for all legs.

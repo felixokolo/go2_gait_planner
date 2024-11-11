@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project(go2_gait_planner)
 
 # Default to C99
@@ -6,9 +6,9 @@ if(NOT CMAKE_C_STANDARD)
   set(CMAKE_C_STANDARD 99)
 endif()
 
-# Default to C++14
+# Default to C++14 (update to C++17 if necessary for ROS 2 Humble compatibility)
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -23,7 +23,6 @@ find_package(unitree_go REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(rosidl_default_runtime REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
-#find_package(go2_scratch REQUIRED)
 
 # Generate messages
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -33,19 +32,14 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/GaitParam.msg"
 )
 
-# Ensure dependencies are found for generated messages
+# Export dependencies for generated messages
 ament_export_dependencies(rosidl_default_runtime)
 
 # Include directories
 include_directories(
   include
-  ${rclcpp_INCLUDE_DIRS}
-  ${std_msgs_INCLUDE_DIRS}
-  ${unitree_go_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
-  ${go2_gait_planner_INCLUDE_DIRS}
 )
-
 
 # Library
 add_library(${PROJECT_NAME}_lib
@@ -75,21 +69,18 @@ add_executable(${PROJECT_NAME}_state_monitor_node src/Low_level/state_monitor_no
 add_executable(${PROJECT_NAME}_fake_publisher_node src/Low_level/fake_publisher_node.cpp)
 add_executable(${PROJECT_NAME}_body_mover_node src/Low_level/body_mover_node.cpp)
 add_executable(${PROJECT_NAME}_trot_gait_node src/Low_level/trot_gait_node.cpp)
-# add_executable(${PROJECT_NAME}_test_node src/Low_level/test.cpp)
 
-# Link libraries to executables
+# Link libraries to executables and declare dependencies
 ament_target_dependencies(${PROJECT_NAME}_lib ${DEPENDENCY_LIST})
 ament_target_dependencies(${PROJECT_NAME}_state_monitor_node ${DEPENDENCY_LIST})
 ament_target_dependencies(${PROJECT_NAME}_fake_publisher_node ${DEPENDENCY_LIST})
 ament_target_dependencies(${PROJECT_NAME}_body_mover_node ${DEPENDENCY_LIST})
 ament_target_dependencies(${PROJECT_NAME}_trot_gait_node ${DEPENDENCY_LIST})
-# ament_target_dependencies(${PROJECT_NAME}_test_node ${DEPENDENCY_LIST})
 
 target_link_libraries(${PROJECT_NAME}_state_monitor_node ${PROJECT_NAME}_lib)
 target_link_libraries(${PROJECT_NAME}_fake_publisher_node ${PROJECT_NAME}_lib)
 target_link_libraries(${PROJECT_NAME}_body_mover_node ${PROJECT_NAME}_lib)
 target_link_libraries(${PROJECT_NAME}_trot_gait_node ${PROJECT_NAME}_lib)
-# target_link_libraries(${PROJECT_NAME}_test_node ${PROJECT_NAME}_lib)
 
 # Ensure ROSIDL generated headers are included
 rosidl_target_interfaces(${PROJECT_NAME}_lib ${PROJECT_NAME} "rosidl_typesupport_cpp")
@@ -97,7 +88,6 @@ rosidl_target_interfaces(${PROJECT_NAME}_state_monitor_node ${PROJECT_NAME} "ros
 rosidl_target_interfaces(${PROJECT_NAME}_fake_publisher_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
 rosidl_target_interfaces(${PROJECT_NAME}_body_mover_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
 rosidl_target_interfaces(${PROJECT_NAME}_trot_gait_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
-# rosidl_target_interfaces(${PROJECT_NAME}_test_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 # Install targets
 install(TARGETS
@@ -105,18 +95,17 @@ install(TARGETS
   ${PROJECT_NAME}_fake_publisher_node
   ${PROJECT_NAME}_body_mover_node
   ${PROJECT_NAME}_trot_gait_node
-  # ${PROJECT_NAME}_test_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
 install(TARGETS
   ${PROJECT_NAME}_lib
-  DESTINATION lib
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 # Install include directory
 install(DIRECTORY include/
-  DESTINATION include/
+  DESTINATION include/${PROJECT_NAME}
 )
 
 # Install message files
@@ -125,3 +114,4 @@ install(DIRECTORY msg
 )
 
 ament_package()
+
